@@ -1,9 +1,9 @@
 function notEmpty(element){
     return element !== "";
 }
-document.addEventListener("DOMContentLoaded", function(e){
+
 enviar.addEventListener("click", (e) => {
-    let inputs = [floatingInput.value, floatingPassword.value];
+    let inputs = [email.value, password.value];
     if (inputs.every(notEmpty)){
         window.location.href="indexx.html";
     } else {
@@ -11,4 +11,4 @@ enviar.addEventListener("click", (e) => {
     }
     
 });
-});
+
