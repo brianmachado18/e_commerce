@@ -1,104 +1,73 @@
-const URL_PRDUCTO = `https://japceibal.github.io/emercado-api/products/${localStorage.getItem('productID')}.json`;
+const URL_PRDUCTOS = `https://japceibal.github.io/emercado-api/products/${localStorage.getItem('productID')}.json`;
 const URL_COMMENTS = `https://japceibal.github.io/emercado-api/products_comments/${localStorage.getItem('productID')}.json`
+const ratingStars = [...document.getElementsByClassName("rating__star")];
 
 
-function showProductInfo(e){
-    informacion.innerHTML = `
-    <div class="text-center p-4">
-      <h2>Descripción del Producto</h2>
-      <p class="lead">
-        Encontrarás aquí toda la información del producto seleccionado.
-      </p>
-    </div>
-    <h3>`+ e.name +`</h3>
-    <hr class="my-3">
-    <dl>
-      <dt>Descripción</dt>
-      <dd>
-        <p>`+ e.description +`</p>
-      </dd>
-      <dt>Categoria</dt>
-      <dd>
-        <p>`+ e.category +`</p>
-      </dd>
-      <dt>Precio</dt>
-      <dd>
-        <p>`+ e.currency +' '+ e.cost +`</p>
-      </dd>
-      <dt>Cantidad de Vendidos</dt>
-      <dd>
-        <p>`+ e.soldCount +`</p>
-      </dd>
-      <dt>Imagenes ilustrativas</dt>
-      <dd>
-        <p class='row' id='imgs'></p>
-      </dd>
-      </dl>
-      <div id='puntuacion'>
-         
+function loadProductInfo(array){
+  const images = array.images;
+
+  productName.innerHTML = array.name;
+  productCat.innerHTML = array.category;
+  productDesc.innerHTML = array.description;
+  productPrice.innerHTML = `${array.cost} ${array.currency}`;
+  productSoldCount.innerHTML = array.soldCount;
+
+  images.forEach(element => {
+    productImages.innerHTML += `
+    <div class="col-lg-3 col-md-4 col-6 mt-3">
+      <div class="d-block mb-4 h-100">
+        <a>  <img class="img-fluid img-thumbnail"  src="${element}" alt=""> </a>
       </div>
-      <div id='productComments'>
-         
-      </div>
-      `
-}
-
-function showImages(a){
-    a.forEach(element => {
-        imgs.innerHTML  += `
-    <div class="col-lg-3 col-md-4 col-6">
-        <div class="d-block mb-4 h-100">
-          <a>  <img class="img-fluid img-thumbnail"  src="` + element + `" alt=""> </a>
-        </div>
-    </div>
-    `;
-});
-}
-
-function showComments(a){
-    let comments = " ";
-    let estrella = "";
-
-    a.forEach(element => {
-        for (let e = 0; e < element.score; e++) {
-            estrella += ` <span class="fa fa-star checked"></span>`
-        }
-        comments += `
-        <div class="container mt-3">
-    
-            <hr class="my-3">
-            <dd>
-            <div class="chip">👤` + element.user + ` </div>  
-                </dd>  
-            <dd>
-                <p > ` + element.description + `   <br>  </span>
-                ` + estrella + `</p>
-            </dd>
-    <dt>Fecha </dt>
-            <dd>
-                <p >  `+ element.dateTime + `</p>
-            </dd>
-            
-            
-    </div>`
-    estrella = "";
+    </div>`; 
   });
-  productComments.innerHTML = comments;
 }
 
+function loadComments(array){
+  array.forEach(element => {
+    let stars = "";
+    for (let index = 0; index < element.score; index++) {
+      stars += `<span class="fa fa-star checked">`;
+    }
+    productComment.innerHTML +=`
+    <dt><p class="chip"><i class="fas fa-user-alt"></i> ${element.user}</p></dt>
+    <dd><p >${element.description}<br>${stars}</p></dd>
+    <dt>Fecha</dt>
+    <dd><p >${element.dateTime}</p></dd>
+    <hr class="my-2">
+    `;
+  });
+} 
+
+function rating(stars){
+  const starClassActive = "rating__star fas fa-star";
+  const starClassInactive = "rating__star far fa-star";
+  const starsLength = stars.length;
+  let i;
+  stars.map((star) => {
+    star.onclick = () => {
+      i = stars.indexOf(star);
+
+      if (star.className===starClassInactive) {
+        for (i; i >= 0; --i) stars[i].className = starClassActive;
+      } else {
+        for (i; i < starsLength; ++i) stars[i].className = starClassInactive;
+      }
+    };
+  });
+}
 
 document.addEventListener('DOMContentLoaded', ()=>{
-    getJSONData(URL_PRDUCTO).then(function(resultObj){
+    getJSONData(URL_PRDUCTOS).then(function(resultObj){
         if (resultObj.status === "ok")
         {
-            showProductInfo(resultObj.data);
-            showImages(resultObj.data.images);
+          loadProductInfo(resultObj.data);
         }
     });
     getJSONData(URL_COMMENTS).then(function(resultObj){
         if (resultObj.status === "ok")
         {
-            showComments(resultObj.data);
+          loadComments(resultObj.data);
+          rating(ratingStars);
         }
     });
     //entrega 2

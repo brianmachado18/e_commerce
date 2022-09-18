@@ -1,5 +1,5 @@
 //modificado para entrega 2
-const URL_PRDUCTOS = `https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem('catID')}.json`;
+const URL_CATEGORIAS = `https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem('catID')}.json`;
 
 //entrega2
 const ORDER_ASC_BY_PRICE = "Precio";
@@ -87,7 +87,7 @@ function showProductList(array){
 
 
 document.addEventListener("DOMContentLoaded", ()=>{
-    getJSONData(URL_PRDUCTOS).then(function(resultObj){
+    getJSONData(URL_CATEGORIAS).then(function(resultObj){
         if (resultObj.status === "ok")
         {
             showProductList(resultObj.data.products);

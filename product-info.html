@@ -38,7 +38,48 @@
   </nav>
   <main>
     <div class="container" id = 'informacion'>
-
+    <!--  Estructura para la informacion del producto  -->
+      <div class="text-center p-4">
+        <h2>Descripción del Producto</h2>
+        <p class="lead"> Encontrarás aquí toda la información del producto seleccionado.</p>
+      </div>
+      <h3 id="productName"></h3>
+      <hr class="my-3">
+      <dl>
+        <dt>Categoria</dt>
+        <dd><p id="productCat"></p></dd>
+        <dt>Descripción</dt>
+        <dd><p id="productDesc"></p></dd>
+        <dt>Precio</dt>
+        <dd><p id="productPrice"></p></dd>
+        <dt>Vendidos</dt>
+        <dd><p id="productSoldCount"></p></dd>
+        <dt>Imágenes ilustrativas</dt>
+        <dd><div class="row" id="productImages"></div></dd>
+        <hr class="my-3">
+        <dt>Comentarios</dt>
+        <dd><div class="container mt-3" id="productComment"></div></dd>
+        <dt>Nuevo comentario</dt>
+        <dd>
+          <div class="w-100">
+            <div class="rating">
+              <i class="rating__star far fa-star"></i>
+              <i class="rating__star far fa-star"></i>
+              <i class="rating__star far fa-star"></i>
+              <i class="rating__star far fa-star"></i>
+              <i class="rating__star far fa-star"></i>
+            </div>
+            <div class="form-outline">
+              <textarea class="form-control" id="textAreaExample" rows="4"></textarea>
+            </div>
+            <div class="d-flex justify-content-between mt-3">
+              <button type="button" class="btn btn-success">
+                Send 
+              </button>
+            </div>
+          </div>
+        </dd>
+      </dl>
     </div>
   </main>
   <footer class="text-muted">
