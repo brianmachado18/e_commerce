@@ -55,15 +55,17 @@ sortCount.addEventListener('click', ()=>{
     showProductList(sortProducts(ORDER_BY_PROD_COUNT, productos));
 });
 
-
-
+function setProductID(id) {
+    localStorage.setItem("productID", id);
+    window.location = "product-info.html"
+}
 
 function showProductList(array){
     let newHtmlCode = '';
     for (let i = 0; i < array.length; i++) {
         let producto = array[i];
         newHtmlCode += `
-        <div class="list-group-item list-group-item-action">
+        <div onclick="setProductID(${producto.id})" class="list-group-item list-group-item-action cursor-active">
             <div class="row">
                 <div class="col-3">
                     <img src="` + producto.image + `" alt="` + producto.description + `" class="img-thumbnail">
@@ -71,8 +73,7 @@ function showProductList(array){
                 <div class="col">
                     <div class="d-flex w-100 justify-content-between">
                         <h4 class="mb-1 ">`+ producto.name + `</h4> 
-                        <a  href="product-info.html" class=" list-group-item-action "></a>
-                        <small class="text-muted">` + producto.currency + ' ' + producto.cost + `</small>
+                        <small class="text-muted">` + producto.currency + ' ' + producto.cost +`</small>
                     </div>
                     <div class="text-muted"> <h5>` + producto.description + `</h5></div>
                     </div>
@@ -83,6 +84,7 @@ function showProductList(array){
         document.getElementById("contenedor_producto").innerHTML = newHtmlCode;
     }
 }
+
 
 document.addEventListener("DOMContentLoaded", ()=>{
     getJSONData(URL_PRDUCTOS).then(function(resultObj){
