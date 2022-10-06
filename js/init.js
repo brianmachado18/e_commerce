@@ -39,3 +39,9 @@ let getJSONData = function(url){
         return result;
     });
 }
+document.addEventListener("DOMContentLoaded", ()=>{
+  cerrar.addEventListener("click", ()=>{
+    localStorage.removeItem("Usuario");
+    window.location = "index.html";
+  });
+});

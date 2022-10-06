@@ -22,6 +22,11 @@ function loadProductInfo(array){
   });
 }
 
+function setProductID(id) {
+  localStorage.setItem("productID", id);
+  window.location = "product-info.html"
+}
+
 function loadComments(array){
   array.forEach(element => {
     let stars = "";
@@ -56,11 +61,33 @@ function rating(stars){
   });
 }
 
+function productoRelacionado(array){
+  let htmlcodazo = "";
+  for (let i = 0; i < array.length; i++){
+    producto = array[i]; 
+    htmlcodazo += `
+        <div onclick="setProductID(${producto.id})" class="cursor-active col-md-3">
+            <div>
+                <img src="` + producto.image + `" class="img-thumbnail">
+            </div>
+            <div>
+                <div class="d-flex w-100 justify-content-between">
+                    <h4 class="mb-1 ">`+ producto.name + `</h4> 
+                </div>
+            </div>
+        </div>
+  `
+      document.getElementById("relacionados").innerHTML = htmlcodazo;
+  }
+}
+
+
 document.addEventListener('DOMContentLoaded', ()=>{
     getJSONData(URL_PRDUCTOS).then(function(resultObj){
         if (resultObj.status === "ok")
         {
           loadProductInfo(resultObj.data);
+          productoRelacionado(resultObj.data.relatedProducts);
         }
     });
     getJSONData(URL_COMMENTS).then(function(resultObj){
@@ -71,5 +98,5 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     });
     //entrega 2
-    email.innerHTML = `<p class="nav-link">${localStorage.getItem('user')}</p>`;
+    email.innerHTML = `${localStorage.getItem('user')}`;
 });

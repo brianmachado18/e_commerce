@@ -147,5 +147,6 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
     });
     //entrega 2
-    email.innerHTML = `<p class="nav-link">${localStorage.getItem('user')}</p>`;
+    email.innerHTML = `${localStorage.getItem('user')}`;
+    
 });

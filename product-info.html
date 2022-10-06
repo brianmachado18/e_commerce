@@ -30,7 +30,16 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item" id="email">
+          <li class="nav-item">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="email">
+                </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/cart.html">Mi carrito</a></li>
+                    <li><a class="dropdown-item" href="/my-profile.html">Mi perfil</a></li>
+                    <li><a class="dropdown-item" id="cerrar" href="#">Cerrar sesion</a></li>
+                  </ul>
+            </div>
           </li>
         </ul>
       </div>
@@ -57,6 +66,20 @@
         <dt>Imágenes ilustrativas</dt>
         <dd><div class="row" id="productImages"></div></dd>
         <hr class="my-3">
+
+
+       
+        
+        <h3> Productos Relacionados: </h3>
+        <div class="row" id="relacionados">
+
+
+
+        </div>
+        <hr class="my-3">
+
+
+
         <dt>Comentarios</dt>
         <dd><div class="container mt-3" id="productComment"></div></dd>
         <dt>Nuevo comentario</dt>
