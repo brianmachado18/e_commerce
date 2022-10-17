@@ -4,12 +4,14 @@ let articlesArray = [];
 document.addEventListener('DOMContentLoaded', ()=>{
     //entrega 2
     email.innerHTML = `${localStorage.getItem('user')}`;
-    fetch(USER_URL)
-    .then(response => response.json())
-    .then(data =>{
-        articlesArray = data.articles;
-        showArticlesArray();
+    getJSONData(USER_URL).then(function(resultObj){
+        if (resultObj.status === "ok")
+        {
+            articlesArray = resultObj.data.articles;
+            showArticlesArray();
+        }
     });
+
 });
 
 function showArticlesArray(){
@@ -28,7 +30,7 @@ function showArticlesArray(){
         let newCost = document.getElementById(`${articlesArray[i].id}-cost`);
         
         newCost.innerHTML = `${articlesArray[i].currency} ${userInput.value * cost}`;
-        userInput.addEventListener("input", function(){ // This event uploads our subtotal in real time when the quantity input gets changed
+        userInput.addEventListener("input", function(){ 
             newCost.innerHTML = `${articlesArray[i].currency} ${userInput.value * cost}`;
             articlesArray[i].count = userInput.value;
             localStorage.setItem("cartArray", JSON.stringify(articlesArray));
