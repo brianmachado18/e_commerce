@@ -88,9 +88,6 @@ function formValidations() {
     const cardFieldset = document.getElementById("card-fieldset");
     const bankFieldset = document.getElementById("bank-fieldset");
     const buyCondition = document.getElementById("buy-condition");
-    const successAlert = document.getElementById("success-alert");
-    const emptyCartAlert = document.getElementById("empty-cart-alert");
-    const buyForm = document.getElementById("buying-form");
 
     cardRadio.addEventListener("input", function () {
         cardFieldset.disabled = false;
@@ -103,25 +100,14 @@ function formValidations() {
         cardFieldset.disabled = true;
         buyCondition.innerHTML = "Transferencia bancaria";
     });
-
-    buyForm.addEventListener("submit", event => {
-        event.preventDefault();
-        if (buyForm.checkValidity() === true && JSON.parse(localStorage.getItem("cartArray")) !== null) {
-            successAlert.style.display = "flex";
-        } else if (JSON.parse(localStorage.getItem("cartArray")) === null) {
-            emptyCartAlert.style.display = "flex";
-        }
-    });
     
     (() => {
         'use strict'
         const forms = document.querySelectorAll('.needs-validation')
         Array.from(forms).forEach(form => {
             form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
+                event.preventDefault()
+                event.stopPropagation()
                 form.classList.add('was-validated')
             }, false)
         })
