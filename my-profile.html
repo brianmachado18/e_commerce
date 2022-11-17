@@ -61,8 +61,55 @@
   </nav>
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <div class="text-center p-4">
+        <h2>Perfil</h2>
+      </div>
+      <hr>
+      <div class="form-group">
+        <form class="needs-validation" id="profile-form" novalidate>
+          <div class="d-flex flex-wrap">
+            <div class="col-5 me-5 mb-3">
+              <label  for="first-name-input">Primer Nombre*</label>
+              <input class="form-control" type="text" name="first-name-input" id="first-name-input" required>
+              <div class="invalid-feedback">
+                Este campo debe estar completo
+              </div>
+            </div>
+           
+            <div class="col-5 mb-3">
+              <label  for="second-name-input">Segundo Nombre</label>
+              <input class="form-control" type="text" name="second-name-input" id="second-name-input">
+            </div>
+            
+            <div class="col-5 me-5 mb-3">
+              <label for="first-lastname-input">Primer Apelllido*</label>
+              <input class="form-control" type="text" name="first-lastname-input" id="first-lastname-input" required>
+              <div class="invalid-feedback">
+                Este campo debe estar completo
+              </div>
+            </div>
+           
+            <div class="col-5 mb-3">
+              <label for="second-lastname-input">Segundo Apellido</label>
+              <input class="form-control" type="text" name="second-lastname-input" id="second-lastname-input">
+            </div>
+            
+            <div class="col-5 me-5 mb-3">
+              <label for="email-input">E-mail*</label>
+              <input class="form-control" type="e-mail" name="email-input" id="email-input" required>
+              <div class="invalid-feedback">
+                Este campo debe estar completo
+              </div>
+            </div>
+            
+            <div class="col-5 mb-3">
+              <label for="phone-input">Teléfono de Contacto</label>
+              <input class="form-control" type="text" name="phone-input" id="phone-input">
+            </div>
+          </div>
+        <hr>
+        <input class="w-25 btn btn-primary mt-3" type="submit" value="Guardar Cambios" id="profile-submit">
+        </form>
       </div>
     </div>
   </main>
